@@ -1,4 +1,5 @@
 # executables
+main
 *a.out
 *.o
 
@@ -6,3 +7,11 @@
 *debug
 *.mod
 *.S
+
+# test files
+*.csv
+*.txt
+
+
+# vscode files
+.vscode/*
