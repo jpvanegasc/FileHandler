@@ -1,0 +1,8 @@
+# executables
+*a.out
+*.o
+
+# debug files
+*debug
+*.mod
+*.S
