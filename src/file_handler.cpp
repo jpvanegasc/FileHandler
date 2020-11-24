@@ -7,9 +7,9 @@ std::string get_full_file(std::ifstream f){
     return buffer.str();
 }
 
-void load_file(std::string filename, double **&data, int &rows, int &columns, char delim){
+void vec_load_file(std::string filename, vector2D(double) &data, char delim){
     std::ifstream file("test.csv");
-    vector2D(double) data_vec;
+    data.clear();
 
     if(file.is_open()){
         std::string line;
@@ -28,12 +28,17 @@ void load_file(std::string filename, double **&data, int &rows, int &columns, ch
 
             row.push_back(std::stod(temp));
 
-            data_vec.push_back(row);
+            data.push_back(row);
         }
     }
     else throw FileNotOpened();
 
     file.close();
+}
+
+void load_file(std::string filename, double **&data, int &rows, int &columns, char delim){
+    vector2D(double) data_vec;
+    vec_load_file(filename, data_vec, delim);
 
     int n_rows = data_vec.size(), n_columns = data_vec[0].size();
 

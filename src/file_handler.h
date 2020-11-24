@@ -26,6 +26,7 @@ struct FileNotOpened: public std::exception{
 
 std::string get_full_file(std::ifstream f);
 
+void vec_load_file(std::string filename, vector2D(double) &data, char delim=',');
 void load_file(std::string filename, double **&data, int &rows, int &columns, char delim=',');
 
 #endif
