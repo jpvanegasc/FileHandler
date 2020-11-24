@@ -22,11 +22,9 @@ struct FileNotOpened: public std::exception{
     }
 };
 
-
-int main(void){
-    char delim=',';
+void load_file(std::string filename, double **&data, int &rows, int &columns, char delim=','){
     std::ifstream file("test.csv");
-    vector2D(double) data;
+    vector2D(double) data_vec;
 
     if(file.is_open()){
         std::string line;
@@ -45,28 +43,38 @@ int main(void){
 
             row.push_back(std::stod(temp));
 
-            data.push_back(row);
+            data_vec.push_back(row);
         }
     }
     else throw FileNotOpened();
 
     file.close();
 
-    int n_rows = data.size(), n_columns = data[0].size();
+    int n_rows = data_vec.size(), n_columns = data_vec[0].size();
 
-    double **matrix = new double *[n_rows];
+    data = new double *[n_rows];
     for(int i=0; i<n_rows; i++)
-        matrix[i] = new double[n_columns];
+        data[i] = new double[n_columns];
 
     for(int i=0; i<n_rows; i++)
         for(int j=0; j<n_columns; j++){
-            matrix[i][j] = data[i][j];
+            data[i][j] = data_vec[i][j];
         }
 
-    std::cout << matrix[0][0] << std::endl;
+    rows = n_rows; columns = n_columns;
 
-    for(int i=0; i<n_rows; i++) delete[] matrix[i];
-    delete[] matrix;
+}
+
+
+int main(void){
+    double **test = NULL; int r = 0, c = 0;
+
+    load_file("test.csv", test, r, c);
+
+    std::cout << test[0][0] << std::endl;
+
+    for(int i=0; i<r; i++) delete[] test[i];
+    delete[] test;
 
     return 0;
 }
