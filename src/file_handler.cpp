@@ -34,6 +34,8 @@ void vec_load_file(std::string filename, vector2D(double) &data, char delim){
     else throw FileNotOpened();
 
     file.close();
+
+    __check_vec(data);
 }
 
 void load_file(std::string filename, double **&data, int &rows, int &columns, char delim){
@@ -54,3 +56,37 @@ void load_file(std::string filename, double **&data, int &rows, int &columns, ch
     rows = n_rows; columns = n_columns;
 
 }
+
+void __check_vec(vector2D(double) &data){
+    int row_len = data[0].size();
+
+    for(int i=1; i<data.size(); i++){
+        int current = data[i].size();
+
+        if(current == row_len) continue;
+        else if(current < row_len){
+            while(current < row_len){
+                data[i].push_back(std::nan("1"));
+                current += 1;
+            }
+            std::cerr << "Missing value in file, NaN added to data. Line " 
+            << i+1 << " too short" << std::endl;
+        }
+        else{
+            for(int j=0; j<i; j++){
+                int temp = row_len;
+                while(temp < current){
+                    data[j].push_back(std::nan("1"));
+                    temp += 1;
+                }
+            }
+            row_len = current;
+            std::cerr << "Missing values in file, NaN added to data. Line " 
+            << i+1 << " too long." << std::endl;
+        }
+    }
+}
+
+
+#undef vector2D
+#undef vector
