@@ -8,7 +8,7 @@ std::string get_full_file(std::ifstream f){
 }
 
 void vec_load_file(std::string filename, vector2D(double) &data, char delim, char comment){
-    std::ifstream file("test.csv");
+    std::ifstream file(filename);
     data.clear();
 
     if(file.is_open()){
