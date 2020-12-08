@@ -63,12 +63,13 @@ void load_file(std::string filename, double **&data, int &rows, int &columns, ch
  * 
  * @param data: pointer to 2D array to be freed.
  * @param rows: number of rows of the array.
+ * @param set_null: define if param 'data' is to be set to null (In case you wish to reuse it).
  */
-void clear(double **&data, int rows){
+void clear(double **&data, int rows, bool set_null){
     for(int i=0; i<rows; i++) delete[] data[i];
     delete[] data;
 
-    data = NULL;
+    if(set_null == true) data = NULL;
 }
 
 void __check_vec(vector2D(double) &data){
