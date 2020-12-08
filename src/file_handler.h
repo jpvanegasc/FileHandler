@@ -1,9 +1,9 @@
 /**
- * File Handler main module
+ * File Handler main module. @jpvanegasc/FileHandler
  * 
  * @author: Juan Vanegas. git: jpvanegasc
  * 
- * You can find this code at github.com/jpvanegasc/FileHandler
+ * Last modification: Dec 8, 2020.
  */
 #ifndef __FILE_HANDLER_H
 #define __FILE_HANDLER_H
