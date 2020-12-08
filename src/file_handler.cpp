@@ -58,6 +58,19 @@ void load_file(std::string filename, double **&data, int &rows, int &columns, ch
 
 }
 
+/**
+ * Simplify memory management, freeing memory and reseting pointer to NULL.
+ * 
+ * @param data: pointer to 2D array to be freed.
+ * @param rows: number of rows of the array.
+ */
+void clear(double **&data, int rows){
+    for(int i=0; i<rows; i++) delete[] data[i];
+    delete[] data;
+
+    data = NULL;
+}
+
 void __check_vec(vector2D(double) &data){
     int row_len = data[0].size();
 
