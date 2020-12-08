@@ -25,10 +25,12 @@ struct FileNotOpened: public std::exception{
     }
 };
 
-std::string get_full_file(std::ifstream f);
+namespace fh{
+    void vec_load_file(std::string filename, vector2D(double) &data, char delim=',', char comment='#');
+    void load_file(std::string filename, double **&data, int &rows, int &columns, char delim=',', char comment='#');
 
-void __check_vec(vector2D(double) &data);
-void vec_load_file(std::string filename, vector2D(double) &data, char delim=',', char comment='#');
-void load_file(std::string filename, double **&data, int &rows, int &columns, char delim=',', char comment='#');
+    void __check_vec(vector2D(double) &data);
+    std::string get_full_file(std::ifstream f);
+}
 
 #endif

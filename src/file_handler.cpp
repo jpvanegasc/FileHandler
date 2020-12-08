@@ -1,11 +1,6 @@
 #include "file_handler.h"
 
-
-std::string get_full_file(std::ifstream f){
-    std::stringstream buffer;
-    buffer << f.rdbuf();
-    return buffer.str();
-}
+namespace fh{
 
 void vec_load_file(std::string filename, vector2D(double) &data, char delim, char comment){
     std::ifstream file(filename);
@@ -18,7 +13,7 @@ void vec_load_file(std::string filename, vector2D(double) &data, char delim, cha
             vector(double) row;
             bool skipped = false;
 
-            for(int i=0; i<line.size(); i++){
+            for(unsigned int i=0; i<line.size(); i++){
                 char current = line[i];
                 if (current == comment){
                     skipped = true;
@@ -66,7 +61,7 @@ void load_file(std::string filename, double **&data, int &rows, int &columns, ch
 void __check_vec(vector2D(double) &data){
     int row_len = data[0].size();
 
-    for(int i=1; i<data.size(); i++){
+    for(unsigned int i=1; i<data.size(); i++){
         int current = data[i].size();
 
         if(current == row_len) continue;
@@ -79,7 +74,7 @@ void __check_vec(vector2D(double) &data){
             << i+1 << " too short" << std::endl;
         }
         else{
-            for(int j=0; j<i; j++){
+            for(unsigned int j=0; j<i; j++){
                 int temp = row_len;
                 while(temp < current){
                     data[j].push_back(std::nan("1"));
@@ -93,6 +88,13 @@ void __check_vec(vector2D(double) &data){
     }
 }
 
+std::string get_full_file(std::ifstream f){
+    std::stringstream buffer;
+    buffer << f.rdbuf();
+    return buffer.str();
+}
+
+} // namespace fh
 
 #undef vector2D
 #undef vector
