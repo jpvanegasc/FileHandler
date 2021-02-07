@@ -9,15 +9,19 @@
 #define __FILE_HANDLER_H
 
 #include<iostream>
-#include<cmath>
 #include<fstream>
 #include<string>
-#include<sstream>
 #include<vector>
 #include<exception>
+#include<memory>
+
 
 #define vector(type) std::vector<type>
-#define vector2D(type) std::vector<vector(type)>
+#define vector2D(type) std::vector< std::vector<type> >
+
+#define un_ptr(type) std::unique_ptr<type>
+#define un_ptr2D(type) std::unique_ptr< std::unique_ptr<type>[] >
+
 
 struct FileNotOpened: public std::exception{
     const char * what() const throw () {
@@ -25,13 +29,22 @@ struct FileNotOpened: public std::exception{
     }
 };
 
-namespace fh{
-    void vec_load_file(std::string filename, vector2D(double) &data, char delim=',', char comment='#');
-    void load_file(std::string filename, double **&data, int &rows, int &columns, char delim=',', char comment='#');
 
-    void clear(double **&data, int rows, bool set_null=true);
-    void __check_vec(vector2D(double) &data);
-    std::string get_full_file(std::ifstream f);
-}
+class FileHandler{
+    private:
+        un_ptr2D(double) declare_ptr(void); // change name
+        void load_file(std::ifstream &file);
+        void dbl_load_file();
+    public:
+        int columns = 0, rows = 0;
 
-#endif
+        std::unique_ptr< std::unique_ptr<std::string>[] > header;
+
+        std::vector< std::vector<double> > content_vec;
+        std::unique_ptr< std::unique_ptr<double>[] > content;
+
+        FileHandler(std::string filename);
+};
+
+
+#endif // __FILE_HANDLER_H
