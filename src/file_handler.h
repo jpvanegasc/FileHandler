@@ -19,9 +19,6 @@
 #define vector(type) std::vector<type>
 #define vector2D(type) std::vector< std::vector<type> >
 
-#define un_ptr(type) std::unique_ptr<type>
-#define un_ptr2D(type) std::unique_ptr< std::unique_ptr<type>[] >
-
 
 struct FileNotOpened: public std::exception{
     const char * what() const throw () {
@@ -32,18 +29,21 @@ struct FileNotOpened: public std::exception{
 
 class FileHandler{
     private:
-        un_ptr2D(double) declare_ptr(void); // change name
-        void load_file(std::ifstream &file);
-        void dbl_load_file();
-    public:
         int columns = 0, rows = 0;
+        char comment, delimiter;
 
-        std::unique_ptr< std::unique_ptr<std::string>[] > header;
+        void load_file(std::ifstream &file);
+        void read_line(const std::string &line, vector(std::string) &row);
+    public:
+        std::vector<std::string> header;
 
-        std::vector< std::vector<double> > content_vec;
-        std::unique_ptr< std::unique_ptr<double>[] > content;
+        std::vector< std::vector<double> > content;
 
-        FileHandler(std::string filename);
+        FileHandler(std::string filename, char =',', char ='#');
+        void content_to_double(double **&data);
+
+        int get_cols(void){return columns;}
+        int get_rows(void){return rows;}
 };
 
 
