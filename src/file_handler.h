@@ -27,7 +27,13 @@ struct FileNotOpened: public std::exception{
     }
 };
 
-
+/**
+ * Opens a file and loads its content and headers (if any) into two std::vectors.
+ * 
+ * @param filename: name or path of file.
+ * @param delim_char : file data delimiter. Default is ','.
+ * @param comm_char : file comment indicator. Default is '#'
+ */
 class FileHandler{
     private:
         int columns = 0, rows = 0;
