@@ -16,6 +16,7 @@ FileHandler::FileHandler(std::string filename, char delimiter_char, char comment
 
 void FileHandler::read_line(const std::string &line, vector(std::string) &row){
     std::string temp; int start = 0;
+    row.clear();
 
     if(line[0] == comment) start = 1;
 
@@ -43,7 +44,7 @@ void FileHandler::load_file(std::ifstream &file){
 
             if(line_num == 0) columns = str_row.size();
 
-            for(int i=0; i<str_row.size(); i++) row.push_back(std::stod(str_row[i]));
+            for(unsigned int i=0; i<str_row.size(); i++) row.push_back(std::stod(str_row[i]));
             content.push_back(row);
         }
         else if(line_num == 0){
