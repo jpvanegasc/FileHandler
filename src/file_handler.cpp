@@ -1,10 +1,10 @@
 #include "file_handler.h"
 
-FileHandler::FileHandler(std::string filename, char delimiter_char, char comment_char){
+FileHandler::FileHandler(std::string filename, char delim_char, char comm_char, bool symmetric){
     std::ifstream file(filename);
 
-    delimiter = delimiter_char;
-    comment = comment_char;
+    delimiter = delim_char;
+    comment = comm_char;
 
     if(file.is_open()){
         load_file(file);
@@ -12,6 +12,8 @@ FileHandler::FileHandler(std::string filename, char delimiter_char, char comment
     else throw FileNotOpened();
 
     file.close();
+
+    if(symmetric) check_content();
 }
 
 void FileHandler::read_line(const std::string &line, vector(std::string) &row){
@@ -56,6 +58,38 @@ void FileHandler::load_file(std::ifstream &file){
     }
 
     rows = line_num;
+}
+
+/**
+ * Checks that the content has every row with the same size. If not, adds nan to the matrix until 
+ *      it becomes square.
+ */
+void FileHandler::check_content(void){
+    for(unsigned int i=1; i<content.size(); i++){
+        int current = content[i].size();
+
+        if(current == rows) continue;
+        else if(current < rows){
+            while(current < rows){
+                content[i].push_back(std::nan("1"));
+                current += 1;
+            }
+            std::cerr << "Missing value in file, NaN added to data. Line " 
+            << i+1 << " too short" << std::endl;
+        }
+        else{
+            for(unsigned int j=0; j<i; j++){
+                int temp = rows;
+                while(temp < current){
+                    content[j].push_back(std::nan("1"));
+                    temp += 1;
+                }
+            }
+            rows = current;
+            std::cerr << "Missing values in file, NaN added to data. Line " 
+            << i+1 << " too long." << std::endl;
+        }
+    }
 }
 
 // data must be null!

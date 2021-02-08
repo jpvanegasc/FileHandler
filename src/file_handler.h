@@ -9,6 +9,7 @@
 #define __FILE_HANDLER_H
 
 #include<iostream>
+#include<cmath>
 #include<fstream>
 #include<string>
 #include<vector>
@@ -34,11 +35,12 @@ class FileHandler{
 
         void load_file(std::ifstream &file);
         void read_line(const std::string &line, vector(std::string) &row);
+        void check_content(void);
     public:
         std::vector<std::string> header;
         std::vector< std::vector<double> > content;
 
-        FileHandler(std::string filename, char =',', char ='#');
+        FileHandler(std::string filename, char =',', char ='#', bool =false);
         void content_to_double(double **&data);
 
         int get_cols(void){return columns;}
