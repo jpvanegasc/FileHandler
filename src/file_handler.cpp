@@ -58,6 +58,16 @@ void FileHandler::load_file(std::ifstream &file){
     rows = line_num;
 }
 
+// data must be null!
+void FileHandler::content_to_double(double **&data){
+    data = new double *[rows];
+    for(int i=0; i<columns; i++) data[i] = new double;
+
+    for(int i=0; i<rows; i++)
+        for(int j=0; j<columns; j++)
+            data[i][j] = content[i][j];
+}
+
 
 #undef vector2D
 #undef vector

@@ -36,7 +36,6 @@ class FileHandler{
         void read_line(const std::string &line, vector(std::string) &row);
     public:
         std::vector<std::string> header;
-
         std::vector< std::vector<double> > content;
 
         FileHandler(std::string filename, char =',', char ='#');
