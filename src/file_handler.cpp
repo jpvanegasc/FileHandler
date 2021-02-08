@@ -1,5 +1,12 @@
 #include "file_handler.h"
 
+/**
+ * Opens a file and loads its content and headers (if any) into two std::vectors.
+ * 
+ * @param filename: name or path of file.
+ * @param delim_char : file data delimiter. Default is ','.
+ * @param comm_char : file comment indicator. Default is '#'
+ */
 FileHandler::FileHandler(std::string filename, char delim_char, char comm_char, bool symmetric){
     std::ifstream file(filename);
 
@@ -16,6 +23,12 @@ FileHandler::FileHandler(std::string filename, char delim_char, char comm_char, 
     if(symmetric) check_content();
 }
 
+/**
+ * Reads and splits a line into a std::vector of str::strings
+ * 
+ * @param line : line to be proccessed
+ * @param row : std::vector to be loaded with data
+ */
 void FileHandler::read_line(const std::string &line, vector(std::string) &row){
     std::string temp; int start = 0;
     row.clear();
@@ -34,6 +47,9 @@ void FileHandler::read_line(const std::string &line, vector(std::string) &row){
 
 }
 
+/**
+ * Takes a std::ifstream file and loads its content and headers
+ */
 void FileHandler::load_file(std::ifstream &file){
     std::string line;
 
@@ -92,7 +108,11 @@ void FileHandler::check_content(void){
     }
 }
 
-// data must be null!
+/**
+ * Load content from file to a null pointer. (Freeing memory is the users' responsability).
+ * 
+ * @param data: null pointer to be loaded with content from file
+ */
 void FileHandler::content_to_double(double **&data){
     data = new double *[rows];
     for(int i=0; i<columns; i++) data[i] = new double;

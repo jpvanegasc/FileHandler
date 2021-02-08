@@ -3,7 +3,7 @@
  * 
  * @author: Juan Vanegas. git: jpvanegasc
  * 
- * Last modification: Dec 8, 2020.
+ * Last modification: Feb 8, 2021.
  */
 #ifndef __FILE_HANDLER_H
 #define __FILE_HANDLER_H
