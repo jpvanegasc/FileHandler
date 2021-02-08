@@ -1,3 +1,3 @@
 # C++ File Handler
 
-version: __0.0.0__
+version: __1.0.0__
