@@ -49,6 +49,7 @@ void FileHandler::load_file(std::ifstream &file){
         }
         else if(line_num == 0){
             read_line(line, header);
+            columns = header.size();
         }
 
         line_num++;
