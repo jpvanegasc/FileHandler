@@ -26,26 +26,38 @@ struct FileNotOpened : public std::exception {
 };
 
 /**
- * Opens a file and loads its content and headers (if any) into two std::vectors.
+ * Mixin to read and write a file
+ *
+ * @param filename: name or path of file.
+ */
+class FileHandler {
+   public:
+    void read_file(std::ifstream &file);
+    void write_file();
+    void check_content(void);
+
+    FileHandler(std::string filename);
+};
+
+/**
+ * Opens a csv file and loads its content and headers (if any) into two std::vectors.
  *
  * @param filename: name or path of file.
  * @param delim_char : file data delimiter. Default is ','.
  * @param comm_char : file comment indicator. Default is '#'
  */
-class FileHandler : public FileHandler {
+class CsvHandler : public FileHandler {
    private:
     int columns = 0, rows = 0;
     char comment, delimiter;
 
-    void load_file(std::ifstream &file);
     void read_line(const std::string &line, vector(std::string) & row);
-    void check_content(void);
 
    public:
     std::vector<std::string> header;
     std::vector<std::vector<double>> content;
 
-    FileHandler(std::string filename, char = ',', char = '#', bool = false);
+    CsvHandler(std::string filename, char = ',', char = '#', bool = false);
     void content_to_double(double **&data);
 
     int get_cols(void) { return columns; }

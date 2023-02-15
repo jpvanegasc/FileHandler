@@ -1,6 +1,6 @@
 #include "file_handler.h"
 
-FileHandler::FileHandler(std::string filename, char delim_char, char comm_char, bool symmetric) {
+CsvHandler::CsvHandler(std::string filename, char delim_char, char comm_char, bool symmetric) {
     std::ifstream file(filename);
 
     delimiter = delim_char;
@@ -24,7 +24,7 @@ FileHandler::FileHandler(std::string filename, char delim_char, char comm_char, 
  * @param line : line to be proccessed
  * @param row : std::vector to be loaded with data
  */
-void FileHandler::read_line(const std::string &line, vector(std::string) & row) {
+void CsvHandler::read_line(const std::string &line, vector(std::string) & row) {
     std::string temp;
     int start = 0;
     row.clear();
@@ -48,7 +48,7 @@ void FileHandler::read_line(const std::string &line, vector(std::string) & row) 
 /**
  * Takes a std::ifstream file and loads its content and headers
  */
-void FileHandler::load_file(std::ifstream &file) {
+void CsvHandler::load_file(std::ifstream &file) {
     std::string line;
 
     int line_num = 0;
@@ -76,7 +76,7 @@ void FileHandler::load_file(std::ifstream &file) {
  * Checks that the content has every row with the same size. If not, adds nan to the matrix until
  *      it becomes square.
  */
-void FileHandler::check_content(void) {
+void CsvHandler::check_content(void) {
     for (unsigned int i = 1; i < content.size(); i++) {
         int current = content[i].size();
 
@@ -109,7 +109,7 @@ void FileHandler::check_content(void) {
  *
  * @param data: null pointer to be loaded with content from file
  */
-void FileHandler::content_to_double(double **&data) {
+void CsvHandler::content_to_double(double **&data) {
     data = new double *[rows];
     for (int i = 0; i < columns; i++) data[i] = new double;
 
