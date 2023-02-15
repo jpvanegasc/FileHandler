@@ -1,7 +1,6 @@
-#include"file_handler.h"
+#include "file_handler.h"
 
-
-int main(void){
+int main(void) {
     FileHandler DataFile("test.csv");
 
     std::cout << DataFile.header[0] << std::endl;
