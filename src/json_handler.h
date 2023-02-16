@@ -3,7 +3,7 @@
  *
  * @author: Juan Vanegas. git: jpvanegasc
  *
- * Last modification: Feb 8, 2021.
+ * Last modification: Feb 16, 2023.
  */
 #ifndef __JSON_HANDLER_H
 #define __JSON_HANDLER_H

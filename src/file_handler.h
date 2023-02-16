@@ -1,12 +1,12 @@
 /**
- * File Handler main module. @jpvanegasc/FileHandler
+ * Csv Handler main module. @jpvanegasc/FileHandler
  *
  * @author: Juan Vanegas. git: jpvanegasc
  *
- * Last modification: Feb 8, 2021.
+ * Last modification: Feb 16, 2023.
  */
-#ifndef __FILE_HANDLER_H
-#define __FILE_HANDLER_H
+#ifndef __CSV_HANDLER_H
+#define __CSV_HANDLER_H
 
 #include <cmath>
 #include <fstream>
@@ -47,4 +47,4 @@ class CsvHandler {
     int get_rows(void) { return rows; }
 };
 
-#endif  // __FILE_HANDLER_H
+#endif  // __CSV_HANDLER_H
