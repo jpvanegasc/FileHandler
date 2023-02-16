@@ -5,26 +5,17 @@
  *
  * Last modification: Feb 8, 2021.
  */
-#ifndef __FILE_HANDLER_H
-#define __FILE_HANDLER_H
+#ifndef __JSON_HANDLER_H
+#define __JSON_HANDLER_H
 
-#include <cmath>
-#include <exception>
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <memory>
 #include <sstream>
 #include <string>
-#include <vector>
 
-#define vector(type) std::vector<type>
-#define vector2D(type) std::vector<std::vector<type>>
-
-struct FileNotOpened : public std::exception {
-    const char *what() const throw() {
-        return "Unable to open file";
-    }
-};
+#include "common.h"
 
 /**
  * Mixin to read and write a file
@@ -47,7 +38,7 @@ class FileHandler {
  */
 class JsonHandler : public FileHandler {
    public:
-   std::map<std::string, std::string> json;
+    std::map<std::string, std::string> json;
     void dumps(std::map<std::string, std::string> json);
     void dump(std::map<std::string, std::string> json, std::string filename);
 

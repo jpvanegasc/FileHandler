@@ -1,5 +1,4 @@
 #include "json_handler.h"
-
 void FileHandler::read_file(std::string filename) {
     std::ifstream file(filename);
 

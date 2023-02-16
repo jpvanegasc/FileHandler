@@ -9,21 +9,16 @@
 #define __FILE_HANDLER_H
 
 #include <cmath>
-#include <exception>
 #include <fstream>
 #include <iostream>
 #include <memory>
 #include <string>
 #include <vector>
 
+#include "common.h"
+
 #define vector(type) std::vector<type>
 #define vector2D(type) std::vector<std::vector<type>>
-
-struct FileNotOpened : public std::exception {
-    const char *what() const throw() {
-        return "Unable to open file";
-    }
-};
 
 /**
  * Opens a csv file and loads its content and headers (if any) into two std::vectors.
