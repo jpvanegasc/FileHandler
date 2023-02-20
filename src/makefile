@@ -5,7 +5,7 @@ CACH = --tool=cachegrind
 C_STD = -std=c++11
 
 # Dependecies
-DEPS = file_handler.cpp json_handler.cpp
+DEPS = csv_handler.cpp json_handler.cpp
 
 all : main.o 
 
