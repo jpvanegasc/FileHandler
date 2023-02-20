@@ -3,7 +3,7 @@
  *
  * @author: Juan Vanegas. git: jpvanegasc
  *
- * Last modification: Feb 16, 2023.
+ * Last major version: Feb 16, 2023.
  */
 #ifndef __CSV_HANDLER_H
 #define __CSV_HANDLER_H
