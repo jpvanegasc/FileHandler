@@ -36,6 +36,8 @@ void JsonHandler::loads(std::string string) {
     std::string key, value;
     short quote_position = 0;
 
+    json.clear();
+
     for (int i = 0; i < string.length(); i++) {
         char c = string[i];
         if (c == '"') {
@@ -55,4 +57,9 @@ void JsonHandler::loads(std::string string) {
             quote_position = (quote_position + 1) % 5;
         }
     }
+}
+
+void JsonHandler::load(std::string filename) {
+    read_file(filename);
+    loads(content);
 }
